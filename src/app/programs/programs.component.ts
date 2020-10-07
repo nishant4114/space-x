@@ -23,12 +23,11 @@ export class ProgramsComponent implements OnInit {
   }
 
   yearFilterClick(year) {
-  console.log('year filter')
-    this.programService.getAllProgramsWithFilter(true, true, year).subscribe((data: any) => {
-      this.allPrograms = data;
-      console.log('all programs with year and success filter', data);
-    });
-
+    console.log('year filter');
+      this.programService.getAllProgramsWithFilter(true, true, year).subscribe((data: any) => {
+        this.allPrograms = data;
+        console.log('all programs with year and success filter', data);
+      });
   }
 
 
