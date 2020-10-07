@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="header">
+      <h1>SpaceX Launch Programs</h1>
+    </div>
+    <div class="row">
+
+        <div class="col-3">
+
+            <div class="white-bg filter">
+                <div class="upper-filter-text">
+                  <div class="filter-text">Filters</div>
+                  <div class="launch-text "> Launch Year</div>
+                </div>
+
+                 <div class="year-filter">
+                     <div class="year-link" *ngFor="let year of yearFilter">
+                         <div (click)="yearFilterClick(year)" >{{year}}</div>
+                     </div>
+                 </div>
+            </div>
+
+        </div>
+        <div class="col-9 all-data">
+            <div *ngFor="let program of allPrograms" class="white-bg card-data ">
+                <div class="program-data">
+                        <img class="program-thumbnail" [src]="program.links.mission_patch">
+                        <div class="program-details">
+                            <h5>{{program.mission_name}}</h5>
+                            <span style="font-weight: bold;">Mission ids:</span> 
+                            <span class="id-list" *ngFor="let id of program.mission_id">
+                                {{id}}
+                            </span>
+                            <div></div>
+                            <br>
+                            <div><span style="font-weight: bold;"> launch year:</span>
+                              {{program.launch_year}}</div>
+                            <br>
+                            <div><span style="font-weight: bold;"> successfull Launch:</span>
+                              {{program.launch_success}}</div>
+                            <br>
+                            <!-- <div><span style="font-weight: bold;"> successfull Landing:</span>
+                              {{program.launch_year}}</div> -->
+                            
+                        </div>
+                </div>
+                
+            </div>
+
+          
+
+        </div>
+
+    </div>
+</div>
