@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BooleanLiteral } from 'typescript';
 import {ProgramsService} from '../programs.service';
 
 @Component({
@@ -9,6 +10,9 @@ import {ProgramsService} from '../programs.service';
 export class ProgramsComponent implements OnInit {
   yearFilter: any;
   allPrograms: any;
+  selectedYear: string;
+  successfullLaunch: boolean;
+  successfullLand: boolean;
 
   constructor(private programService: ProgramsService) { }
 
@@ -23,11 +27,30 @@ export class ProgramsComponent implements OnInit {
   }
 
   yearFilterClick(year) {
+    this.selectedYear = year;
     console.log('year filter');
-      this.programService.getAllProgramsWithFilter(true, true, year).subscribe((data: any) => {
-        this.allPrograms = data;
-        console.log('all programs with year and success filter', data);
-      });
+    this.programService.getAllProgramsWithFilter(this.successfullLaunch, this.successfullLand, year).subscribe((data: any) => {
+      this.allPrograms = data;
+      console.log('all programs with year and success filter', data);
+    });
+  }
+
+  launchSuccessFilterClick(value) {
+    this.successfullLaunch = value;
+    console.log('year filter');
+    this.programService.getAllProgramsWithFilter(this.successfullLaunch, this.successfullLand, this.selectedYear).subscribe((data: any) => {
+      this.allPrograms = data;
+      console.log('all programs with year and success filter', data);
+    });
+  }
+
+  landSuccessFilterClick(value) {
+    this.successfullLand = value;
+    console.log('year filter');
+    this.programService.getAllProgramsWithFilter(this.successfullLaunch, this.successfullLand, this.selectedYear).subscribe((data: any) => {
+      this.allPrograms = data;
+      console.log('all programs with year and success filter', data);
+    });
   }
 
 

@@ -6,8 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProgramsService {
+  // https://api.spacexdata.com/v3/launches?limit=100&launch_year=2009
 
-  private allPrograms = 'https://api.spacexdata.com/v3/launches?limit=100';
+  private allPrograms = 'https://api.spacexdata.com/v3/launches';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -21,8 +22,23 @@ export class ProgramsService {
   }
 
   public getAllProgramsWithFilter(launchSuccess, landSuccess, year): Observable<any> {
-    const opts = { params: new HttpParams({ fromString: 'limit=100' + '&amp;launch_success=' + launchSuccess
-                                             + '&amp;land_success=' + landSuccess + '&amp;launch_year=' + year }) };
+    console.log('launch success', launchSuccess);
+    console.log('land success', landSuccess);
+    console.log('year', year);
+    let paramString = '';
+    if (launchSuccess !== undefined) {
+      paramString += '&launch_success=' + launchSuccess;
+    }
+    if (landSuccess !== undefined) {
+      paramString += '&land_success=' + landSuccess;
+    }
+    if (year !== undefined) {
+      paramString += '&launch_year=' + year;
+    }
+
+    console.log('param string', paramString);
+
+    const opts = { params: new HttpParams({ fromString: 'limit=100' + paramString}) };
     return this.httpClient.get<any>(this.allPrograms, opts);
   }
 

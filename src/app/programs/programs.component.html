@@ -4,43 +4,62 @@
     </div>
     <div class="row">
 
-        <div class="col-3">
+        <div class="col-2">
 
             <div class="white-bg filter">
                 <div class="upper-filter-text">
                   <div class="filter-text">Filters</div>
                   <div class="launch-text "> Launch Year</div>
-                </div>
+                  <div class="year-filter">
+                    <div class="year-link " [ngClass]="selectedYear === year ? 'year-link-selected' : ''"
+                      *ngFor="let year of yearFilter">
+                      <div class="hand-cursor" (click)="yearFilterClick(year)">{{year}}</div>
+                    </div>
+                  </div>
 
-                 <div class="year-filter">
-                     <div class="year-link" *ngFor="let year of yearFilter">
-                         <div (click)="yearFilterClick(year)" >{{year}}</div>
-                     </div>
-                 </div>
+                  <div class="launch-text "> Successfull Launch</div>
+                  <div class="year-filter">
+                    <div class="year-link" [ngClass]="successfullLaunch === true ? 'year-link-selected' : ''">
+                      <div class="hand-cursor" (click)="launchSuccessFilterClick(true)">True</div>
+                    </div>
+                    <div class="year-link" [ngClass]="successfullLaunch === false ? 'year-link-selected' : ''">
+                      <div class="hand-cursor" (click)="launchSuccessFilterClick(false)">False</div>
+                    </div>
+                  </div>
+
+                  <div class="launch-text "> Successfull Landing</div>
+
+                  <div class="year-filter">
+                    <div class="year-link" [ngClass]="successfullLand === true ? 'year-link-selected' : ''">
+                      <div class="hand-cursor" (click)="landSuccessFilterClick(true)">True</div>
+                    </div>
+                    <div class="year-link" [ngClass]="successfullLand === false ? 'year-link-selected' : ''">
+                      <div class="hand-cursor" (click)="landSuccessFilterClick(false)">False</div>
+                    </div>
+                  </div>
+                </div>
             </div>
 
         </div>
-        <div class="col-9 all-data">
-            <div *ngFor="let program of allPrograms" class="white-bg card-data ">
+        <div class="col-10 all-data">
+            <div *ngFor="let program of allPrograms; let i = index" class="white-bg card-data ">
                 <div class="program-data">
-                        <img class="program-thumbnail" [src]="program.links.mission_patch">
+                  <div class="img-container">
+                    <img class="program-thumbnail" [src]="program.links.mission_patch">
+                  </div>
+                        
                         <div class="program-details">
-                            <h5>{{program.mission_name}}</h5>
-                            <span style="font-weight: bold;">Mission ids:</span> 
+                            <h5>{{program.mission_name}} #{{i+1}}</h5>
+                            <span class="program-detail-headline" style="font-weight: bold;">Mission ids:</span> 
                             <span class="id-list" *ngFor="let id of program.mission_id">
                                 {{id}}
                             </span>
-                            <div></div>
-                            <br>
                             <div><span style="font-weight: bold;"> launch year:</span>
                               {{program.launch_year}}</div>
-                            <br>
-                            <div><span style="font-weight: bold;"> successfull Launch:</span>
+                            <div><span style="font-weight: bold;"> Successfull Launch:</span>
                               {{program.launch_success}}</div>
-                            <br>
-                            <!-- <div><span style="font-weight: bold;"> successfull Landing:</span>
-                              {{program.launch_year}}</div> -->
-                            
+                              <div><span style="font-weight: bold;"> Successfull Landing:</span>
+                                {{program.land_success}}</div>                            
                         </div>
                 </div>
                 
@@ -50,5 +69,9 @@
 
         </div>
 
+    </div>
+    <div class="row developer-credits">
+      <div class="text-bold">Developed By:</div>
+      <div>Nishant Varshney</div>
     </div>
 </div>
