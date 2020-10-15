@@ -59,7 +59,8 @@
                             <div><span style="font-weight: bold;"> Successfull Launch:</span>
                               {{program.launch_success}}</div>
                               <div><span style="font-weight: bold;"> Successfull Landing:</span>
-                                {{program.land_success}}</div>                            
+                                {{program.rocket.first_stage.cores[0].land_success === null ?  'NA' : program.rocket.first_stage.cores[0].land_success }}
+                                </div>
                         </div>
                 </div>
                 
